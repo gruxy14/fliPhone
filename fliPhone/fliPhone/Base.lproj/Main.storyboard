@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,31 +17,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvd-Nj-lby">
-                                <rect key="frame" x="255" y="285" width="90" height="30"/>
-                                <color key="backgroundColor" red="0.95613684048147074" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Click to Start">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxu-1k-FtE">
-                                <rect key="frame" x="229" y="20" width="142" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="YOUR SCORE">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lo6-Jh-QAt">
+                                <rect key="frame" x="184" y="28" width="232" height="59"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="49"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0z-c2-RUz">
+                                <rect key="frame" x="275" y="95" width="51" height="100"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="83"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q23-yx-h2K">
+                                <rect key="frame" x="277" y="285" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="beginFlip:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PDE-C1-hbd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.28961490480000002" green="1" blue="0.91654744290000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Nvd-Nj-lby" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2LI-m0-4cu"/>
-                            <constraint firstItem="hxu-1k-FtE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="TUM-tv-EBQ"/>
-                            <constraint firstItem="Nvd-Nj-lby" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k1B-MX-iOv"/>
-                            <constraint firstItem="hxu-1k-FtE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="meX-bH-T2q"/>
-                            <constraint firstItem="Nvd-Nj-lby" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="uAt-vX-cQ0"/>
-                            <constraint firstItem="Nvd-Nj-lby" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="wQg-eJ-Bhu"/>
+                            <constraint firstItem="q23-yx-h2K" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5ZD-Es-L9g"/>
+                            <constraint firstItem="lo6-Jh-QAt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KQV-fh-rLn"/>
+                            <constraint firstItem="lo6-Jh-QAt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="M2Q-oG-ahr"/>
+                            <constraint firstItem="R0z-c2-RUz" firstAttribute="top" secondItem="lo6-Jh-QAt" secondAttribute="bottom" constant="8" id="XSK-hM-JaS"/>
+                            <constraint firstItem="q23-yx-h2K" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bKm-IY-hl2"/>
+                            <constraint firstItem="R0z-c2-RUz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gWQ-x0-9T1"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="flips" destination="q23-yx-h2K" id="wb5-cI-z9g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
