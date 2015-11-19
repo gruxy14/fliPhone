@@ -33,7 +33,13 @@ class ViewController: UIViewController {
         var freeFall = false
         var rotation = 0.0
         var acc = UILabel(frame: CGRectMake(view.bounds.midX, view.bounds.midY, 50, 50))
-        var time = UILabel(frame: CGRectMake(view.bounds.midX, view.bounds.midY, 50, 50))
+        var time = UILabel(frame: CGRectMake(view.bounds.midX, view.bounds.midY, 100, 50))
+        var rot = UILabel(frame: CGRectMake(view.bounds.midX, view.bounds.midY, 100, 50))
+        rot.center = CGPoint(x: view.bounds.midX - 50, y: view.bounds.midY + 20)
+        rot.text = "0"
+        rot.backgroundColor = UIColor.whiteColor()
+        rot.textColor = UIColor.blackColor()
+        self.view.addSubview(rot)
         time.center = CGPoint(x: view.bounds.midX + 50, y: view.bounds.midY)
         time.text = "0"
         time.backgroundColor = UIColor.whiteColor()
@@ -44,17 +50,39 @@ class ViewController: UIViewController {
         acc.backgroundColor = UIColor.whiteColor()
         acc.textColor = UIColor.blackColor()
         self.view.addSubview(acc)
+        var medianRotRate = Array<Double>()
+        var countRot = false
         
-        if motionManager.accelerometerAvailable{
-            motionManager.accelerometerUpdateInterval = 0.01
-            motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue()){(data, error)->Void
+        
+        if motionManager.deviceMotionAvailable{
+            motionManager.deviceMotionUpdateInterval = 0.03
+            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()){(data, error)->Void
             in
-                startAcc = sqrt(pow(((data?.acceleration.x)!),2.0) + pow(((data?.acceleration.y)!),2.0) + pow(((data?.acceleration.z)!),2.0))
-               
+                
+                startAcc = sqrt(pow(((data?.userAcceleration.x)!),2.0) + pow(((data?.userAcceleration.y)!),2.0) + pow(((data?.userAcceleration.z)!),2.0))
+                print("Total acc \(startAcc)")
+                print("x acc: \((data?.userAcceleration.x)!)")
+                print("y acc: \((data?.userAcceleration.y)!)")
+                print("z acc: \((data?.userAcceleration.z)!)")
+                print("x without g: \((data?.gravity.x)!)")
+                print("y without g: \((data?.gravity.y)!)")
+                print("z without g: \((data?.gravity.z)!)")
+                
                 acc.text = "\(startAcc)"
                 
                 
-                if startAcc > -0.7 && startAcc < 0.7 && !freeFall{
+                rotation = (data?.rotationRate.y)!
+                //print(rotation)
+                if rotation > 2.0{
+                    startTime = NSDate()
+                    countRot = true
+                    freeFall = true
+                }
+                if countRot{
+                    medianRotRate.append(rotation)
+                }
+                
+                if startAcc > 0.9 && startAcc < 1.1 && !freeFall{
                    
                     startTime = NSDate()
                     freeFall = true
@@ -62,10 +90,33 @@ class ViewController: UIViewController {
                       //  rotation = (motionManager.gyroData?.rotationRate.y)!
                     //}
                 }
-                if startAcc > 2 && freeFall{
+                
+                
+                if (startAcc > 1.2 || startAcc < 0.8 || rotation < 0.5) && freeFall{
+                    
                     endTime = NSDate()
                     let timeInterval: Double = endTime.timeIntervalSinceDate(startTime)
-                    time.text = "\(timeInterval)"
+                    countRot = false
+                    freeFall = false
+                    //medianRotRate.sortInPlace()
+                    //var median = medianRotRate.count/2
+                    //rotation = medianRotRate[median]
+                    
+                    if timeInterval < 0.1 {
+                        time.text = "Too short"
+                        
+                    }
+                    else{
+                    if startAcc < 1.5{
+                        time.text = "Try again"
+                        motionManager.stopDeviceMotionUpdates()
+                    }
+                    else{
+                        time.text = "\(timeInterval)"
+                        motionManager.stopDeviceMotionUpdates()
+                    }
+                    }
+                    
                     your_flip = Int(round(rotation*timeInterval))
                 }
                 
